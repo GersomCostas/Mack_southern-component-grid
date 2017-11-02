@@ -138,19 +138,19 @@ if(!require(mapdata)) install.packages("mapdata") ; require(mapdata)
  
  rownames(RECT_south)<-RECT_south$RECT
  
- RECTsouth_p<-spRbind(RECT2_p,RECT3_p)
+ RECT_p<-spRbind(RECT2_p,RECT3_p)
  
- RECTsouth_p<-spRbind(RECTsouth_p,RECT5_p)
+ RECT_p<-spRbind(RECT_p,RECT5_p)
  
  
 # Projection grid
  
- proj4string(RECTsouth_p) <- CRS("+proj=longlat   +ellps=WGS84 +datum=WGS84")
+ proj4string(RECT_p) <- CRS("+proj=longlat   +ellps=WGS84 +datum=WGS84")
 
  
 # Convert to SpatialPolygonsDataFrame. Data frame represents rectangle characteristics (polygons)
  
- RECTsouth_p<-SpatialPolygonsDataFrame(RECTsouth_p, data=RECT_south)
+ RECT_p<-SpatialPolygonsDataFrame(RECT_p, data=RECT_south)
  
 
 # ploting
@@ -164,7 +164,7 @@ if(!require(mapdata)) install.packages("mapdata") ; require(mapdata)
  
  map(database = "worldHires",  xlim = c(-11,1), ylim = c(36,46),fill=T, type="n")
  
- plot(RECTsouth_p, border="grey",  xlim = c(-11,1), ylim = c(36,46))
+ plot(RECT_p, border="grey",  xlim = c(-11,1), ylim = c(36,46))
  
  degAxis(2, at = c(seq(36,46, by=3)),cex.axis = 0.5,las=2)
  
