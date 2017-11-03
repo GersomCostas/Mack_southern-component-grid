@@ -70,16 +70,21 @@ if(!require(mapdata)) install.packages("mapdata") ; require(mapdata)
 
 # Matching covered area by land to southern area rectangles 
 
-##general (RECT_south)
+ ##general (RECT_south)
   
-  RECT_south<-join(RECT_south[ ,c("lat","lon","cat")],RECTall[ ,c("lat","lon","r1","R2" ,"RECT","Area","sea_ratio","Area_minus_land")],by=c("lat","lon"))
-  summary(RECT_south)
+   RECT_south<-join(RECT_south[ ,c("lat","lon","cat")],RECTall[ ,c("lat","lon","r1","R2" ,"RECT","Area","sea_ratio","Area_minus_land")],by=c("lat","lon"))
+   summary(RECT_south)
 
-  #Problem with NA to be gridded. rectagle in Gibraltar street with NA->delete
+# Problem with NA to be gridded. rectagle in Gibraltar street with NA->delete
   RECT_south<-RECT_south[complete.cases(RECT_south),]
   RECT_south<-droplevels(RECT_south)
- 
- 
+
+   
+# standardised name for overlap function
+   
+  RECT<-RECT_south
+  
+  
 ##region grid (RECT2, RECT3, RECT5)
   
  RECT2<-join(RECT2[ ,c("lat","lon","cat")],RECTall[ ,c("lat","lon","r1","R2" ,"RECT","Area","sea_ratio","Area_minus_land")],by=c("lat","lon"))
@@ -92,7 +97,7 @@ if(!require(mapdata)) install.packages("mapdata") ; require(mapdata)
  
  RECT5<-join(RECT5[ ,c("lat","lon","cat")],RECTall[ ,c("lat","lon","r1","R2" ,"RECT","Area","sea_ratio","Area_minus_land")],by=c("lat","lon"))
  
- #Problem with NA to be gridded.  rectagle in Gibraltar street with NA->delete
+# Problem with NA to be gridded.  rectagle in Gibraltar street with NA->delete
  RECT5<-RECT5[complete.cases(RECT5),]
  RECT5<-droplevels(RECT5)
 
@@ -111,7 +116,7 @@ if(!require(mapdata)) install.packages("mapdata") ; require(mapdata)
  RECT5_p <- as(RECT5, "SpatialPolygons") 
  
  
-#Ploting grid 
+# Ploting grid 
  
  plot(RECT2_p)
  plot(RECT3_p)
